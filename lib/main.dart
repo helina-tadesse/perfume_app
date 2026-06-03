@@ -14,7 +14,6 @@ class PerfumeApp extends StatelessWidget {
       title: 'Perfume E-Commerce',
       theme: ThemeData(
         scaffoldBackgroundColor: const Color(0xFFF9F9F9),
-        fontFamily: 'Secondary', // Falls back to system sans-serif seamlessly
       ),
       home: const HomeScreen(),
     );
@@ -22,7 +21,7 @@ class PerfumeApp extends StatelessWidget {
 }
 
 // ==========================================
-// 1. DATA MODEL & SAMPLE DATA
+// DATA MODEL
 // ==========================================
 class Perfume {
   final String id;
@@ -66,7 +65,7 @@ final List<Perfume> samplePerfumes = [
 ];
 
 // ==========================================
-// 2. HOME SCREEN
+// HOME SCREEN
 // ==========================================
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -93,27 +92,16 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 10),
             const Text(
               'Find Your\nSignature Scent',
-              style: TextStyle(
-                fontSize: 32, 
-                fontWeight: FontWeight.bold, 
-                letterSpacing: 1.2,
-                height: 1.2,
-              ),
+              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, letterSpacing: 1.2, height: 1.2),
             ),
             const SizedBox(height: 25),
-            
-            // Search Bar
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(15),
                 boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.03), 
-                    blurRadius: 10, 
-                    offset: const Offset(0, 5),
-                  ),
+                  BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 10, offset: const Offset(0, 5)),
                 ],
               ),
               child: const TextField(
@@ -126,8 +114,6 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 30),
-            
-            // Category Tabs
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -145,8 +131,6 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 25),
-            
-            // Perfume Grid Layout
             Expanded(
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -176,11 +160,7 @@ class HomeScreen extends StatelessWidget {
                               tag: perfume.id,
                               child: ClipRRect(
                                 borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-                                child: Image.network(
-                                  perfume.imageUrl, 
-                                  fit: BoxFit.cover, 
-                                  width: double.infinity,
-                                ),
+                                child: Image.network(perfume.imageUrl, fit: BoxFit.cover, width: double.infinity),
                               ),
                             ),
                           ),
@@ -189,24 +169,14 @@ class HomeScreen extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  perfume.brand, 
-                                  style: const TextStyle(fontSize: 11, color: Colors.grey, fontWeight: FontWeight.bold, letterSpacing: 1),
-                                ),
+                                Text(perfume.brand, style: const TextStyle(fontSize: 11, color: Colors.grey, fontWeight: FontWeight.bold, letterSpacing: 1)),
                                 const SizedBox(height: 4),
-                                Text(
-                                  perfume.name, 
-                                  style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold), 
-                                  overflow: TextOverflow.ellipsis,
-                                ),
+                                Text(perfume.name, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold), overflow: TextOverflow.ellipsis),
                                 const SizedBox(height: 8),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(
-                                      '\$${perfume.price.toStringAsFixed(2)}', 
-                                      style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                                    ),
+                                    Text('\$${perfume.price.toStringAsFixed(2)}', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
                                     Row(
                                       children: [
                                         const Icon(Icons.star, color: Colors.amber, size: 14),
@@ -234,7 +204,7 @@ class HomeScreen extends StatelessWidget {
 }
 
 // ==========================================
-// 3. PRODUCT DETAILS SCREEN
+// PRODUCT DETAILS SCREEN
 // ==========================================
 class DetailsScreen extends StatelessWidget {
   final Perfume perfume;
@@ -246,7 +216,6 @@ class DetailsScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Stack(
         children: [
-          // Hero Product Image
           Positioned(
             top: 0,
             left: 0,
@@ -257,8 +226,6 @@ class DetailsScreen extends StatelessWidget {
               child: Image.network(perfume.imageUrl, fit: BoxFit.cover),
             ),
           ),
-          
-          // Custom Floating Back Action and Favorite Buttons
           Positioned(
             top: 50,
             left: 20,
@@ -268,10 +235,7 @@ class DetailsScreen extends StatelessWidget {
               children: [
                 CircleAvatar(
                   backgroundColor: Colors.white,
-                  child: IconButton(
-                    icon: const Icon(Icons.arrow_back, color: Colors.black), 
-                    onPressed: () => Navigator.pop(context),
-                  ),
+                  child: IconButton(icon: const Icon(Icons.arrow_back, color: Colors.black), onPressed: () => Navigator.pop(context)),
                 ),
                 const CircleAvatar(
                   backgroundColor: Colors.white,
@@ -280,8 +244,6 @@ class DetailsScreen extends StatelessWidget {
               ],
             ),
           ),
-          
-          // Product Details Sheet Panel
           Positioned(
             bottom: 0,
             left: 0,
@@ -296,10 +258,7 @@ class DetailsScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    perfume.brand, 
-                    style: const TextStyle(fontSize: 13, color: Colors.grey, fontWeight: FontWeight.bold, letterSpacing: 2),
-                  ),
+                  Text(perfume.brand, style: const TextStyle(fontSize: 13, color: Colors.grey, fontWeight: FontWeight.bold, letterSpacing: 2)),
                   const SizedBox(height: 6),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -309,8 +268,6 @@ class DetailsScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 12),
-                  
-                  // Rating Display row
                   Row(
                     children: [
                       const Icon(Icons.star, color: Colors.amber, size: 18),
@@ -325,8 +282,6 @@ class DetailsScreen extends StatelessWidget {
                   const SizedBox(height: 8),
                   Text(perfume.description, style: const TextStyle(color: Colors.grey, height: 1.5, fontSize: 14)),
                   const SizedBox(height: 25),
-                  
-                  // Bottle size selector component
                   const Text('Size', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 10),
                   Row(
@@ -339,19 +294,11 @@ class DetailsScreen extends StatelessWidget {
                           color: isSelected ? Colors.black : Colors.grey[100],
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Text(
-                          size, 
-                          style: TextStyle(
-                            color: isSelected ? Colors.white : Colors.black, 
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                        child: Text(size, style: TextStyle(color: isSelected ? Colors.white : Colors.black, fontWeight: FontWeight.bold)),
                       );
                     }).toList(),
                   ),
                   const Spacer(),
-                  
-                  // Add to Bag Core Action Button
                   SizedBox(
                     width: double.infinity,
                     height: 55,
