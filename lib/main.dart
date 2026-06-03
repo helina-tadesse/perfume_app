@@ -288,7 +288,7 @@ class DetailsScreen extends StatelessWidget {
                     children: ['50 ml', '100 ml', '200 ml'].map((size) {
                       bool isSelected = size == '100 ml'; 
                       return Container(
-                        margin: const EdgeInsets.right(15),
+                        margin: const EdgeInsets.only(right: 15),
                         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                         decoration: BoxDecoration(
                           color: isSelected ? Colors.black : Colors.grey[100],
